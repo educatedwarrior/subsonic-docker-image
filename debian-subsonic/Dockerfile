@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM lsiobase/xenial 
 
 MAINTAINER michael@schuerig.de
 
@@ -12,7 +12,7 @@ RUN useradd --home /var/subsonic -M subsonic -K UID_MIN=10000 -K GID_MIN=10000 &
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     apt-get update && \
     apt-get dist-upgrade --yes --no-install-recommends --no-install-suggests && \
-    apt-get install --yes --no-install-recommends --no-install-suggests openjdk-7-jre-headless locales && \
+    apt-get install --yes --no-install-recommends --no-install-suggests openjdk-8-jre-headless locales && \
     apt-get clean
 
 ENV SUBSONIC_VERSION 6.0
@@ -28,14 +28,11 @@ RUN dpkg -i /tmp/subsonic-$SUBSONIC_VERSION.deb && rm -f /tmp/*.deb
 # <host-dir>/var/subsonic/transcode/lame -> /usr/local/bin/lame
 RUN ln /var/subsonic/transcode/ffmpeg /var/subsonic/transcode/lame /usr/local/bin
 
-VOLUME /var/subsonic
-
 COPY startup.sh /startup.sh
-
-EXPOSE 4040
 
 USER subsonic
 
 RUN /bin/sh /startup.sh
 
-#CMD ["/bin/sh"]
+EXPOSE 4040
+VOLUME /var/subsonic /mnt/media
