@@ -36,5 +36,5 @@ EXPOSE 4040
 
 USER subsonic
 
-CMD []
-ENTRYPOINT ["/startup.sh"]
+CMD ["/startup.sh"]
+# ENTRYPOINT ["/startup.sh"]
