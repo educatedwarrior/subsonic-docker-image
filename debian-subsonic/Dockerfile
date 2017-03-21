@@ -36,4 +36,6 @@ EXPOSE 4040
 
 USER subsonic
 
-CMD ["/startup.sh"]
+RUN /bin/sh /startup.sh
+
+CMD ["/bin/sh"]
