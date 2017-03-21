@@ -38,4 +38,4 @@ USER subsonic
 
 RUN /bin/sh /startup.sh
 
-CMD ["/bin/sh"]
+#CMD ["/bin/sh"]
